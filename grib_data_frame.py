@@ -8,10 +8,13 @@ f = pygrib.open(sys.argv[1])
 
 all_gribs = [a for a in f]
 
-lats = np.array(all_gribs[0].latlons()[0])[0]
-lons = np.array(all_gribs[0].latlons()[1])[0]
+outer = all_gribs[0].latlons()[0].shape[0]
+inner = all_gribs[0].latlons()[0].shape[1]
 
-surf_pres = all_gribs[401].values.reshape(1, all_gribs[401].values.shape[0]*all_gribs[401].values.shape[1])[0]
-surf_temp = all_gribs[403].values.reshape(1, all_gribs[401].values.shape[0]*all_gribs[401].values.shape[1])[0]
+lats = np.array(all_gribs[0].latlons()[0].reshape(outer*inner))
+lons = np.array(all_gribs[0].latlons()[1].reshape(outer*inner))
+
+surf_pres = np.array(all_gribs[401].values.reshape(1, outer*inner)[0])
+surf_temp = np.array(all_gribs[403].values.reshape(1, outer*inner)[0])
 
 shell()
