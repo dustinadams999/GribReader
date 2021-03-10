@@ -2,6 +2,7 @@
 import numpy as np
 from IPython import embed as shell
 import pygrib
+import sklearn
 import sys
 
 f = pygrib.open(sys.argv[1])
